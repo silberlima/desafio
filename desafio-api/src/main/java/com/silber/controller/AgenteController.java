@@ -18,10 +18,10 @@ public class AgenteController {
 	
 	@Autowired
 	AgenteService agenteService;
-	
 	@PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE})
 	public void arquivos(@RequestBody List<Agente> agentes) {
 		agenteService.imprimirCodigos(agentes);		
 	}
+
 
 }

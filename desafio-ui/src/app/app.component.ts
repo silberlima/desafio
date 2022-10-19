@@ -25,4 +25,17 @@ export class AppComponent {
       })
       .subscribe((res) => console.log(res));
   }
+
+  readFile = (e: any) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const xmlData: string = (evt as any).target.result;
+      console.log('Teste', xmlData);
+    };
+    reader.readAsText(file);
+  };
 }
