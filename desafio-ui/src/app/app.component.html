@@ -1,4 +1,4 @@
 <div>
-  <input id="file" type="file" multiple (change)="onFileChange($event)"/>
-  <input type="file" id="file-input" (change)="readFile($event)" />
+  <mat-spinner *ngIf="carregando">  </mat-spinner>
+  <input id="file" type="file" multiple (change)="onFileChange($event)" *ngIf="!carregando"/>
 </div>

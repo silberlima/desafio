@@ -8,34 +8,29 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor(private http: HttpClient) {}
+  carregando = false;
 
   onFileChange(event: any) {
+    this.carregando = true;
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'multipart/form-data');
     headers.set('mimeType', 'multipart/form-data');
 
     var formData: any = new FormData();
+
     for (var i = 0; i < event.target.files.length; i++) {
-      formData.append('agente', formData);
+      formData.append('arquivos', event.target.files[i]);
     }
 
     this.http
-      .post<any>('http://localhost:8080/arquivos', formData, {
-        headers: headers,
-      })
-      .subscribe((res) => console.log(res));
-  }
+      .post<any>('http://localhost:8080/arquivos', formData)
+      .subscribe((res) => {
+        console.log(res);
 
-  readFile = (e: any) => {
-    const file = e.target.files[0];
-    if (!file) {
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      const xmlData: string = (evt as any).target.result;
-      console.log('Teste', xmlData);
-    };
-    reader.readAsText(file);
-  };
+      });
+
+      setTimeout(()=>{
+        this.carregando = false;
+      }, 3000)
+  }
 }
